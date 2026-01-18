@@ -1,5 +1,6 @@
 from pathlib import Path
 import mimetypes
+import os
 
 # -----------------------------
 # Base directory
@@ -9,9 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -----------------------------
 # Security
 # -----------------------------
-SECRET_KEY = 'django-insecure-xw^qk*$(3k39)bzdrop@#65j*8*k9$yp*ah79u$s=$@rh4r^e)'
-DEBUG = True
-ALLOWED_HOSTS = ['*']  # Allow all hosts for development/testing
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-dev-key')  # use env variable for Render
+DEBUG = False  # Production must be False
+ALLOWED_HOSTS = ['*']  # You can restrict to your Render domain later
 
 # -----------------------------
 # Installed apps
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
 # -----------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # handles static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -63,7 +65,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 # -----------------------------
-# Database (SQLite for dev)
+# Database (SQLite for now)
 # -----------------------------
 DATABASES = {
     'default': {
@@ -96,6 +98,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -108,10 +111,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # -----------------------------
 # Development convenience: serve video properly
 # -----------------------------
-if DEBUG:
-    mimetypes.add_type("video/mp4", ".mp4", True)
-    mimetypes.add_type("video/webm", ".webm", True)
-    mimetypes.add_type("video/ogg", ".ogv", True)
+mimetypes.add_type("video/mp4", ".mp4", True)
+mimetypes.add_type("video/webm", ".webm", True)
+mimetypes.add_type("video/ogg", ".ogv", True)
 
 # -----------------------------
 # Authentication redirects
@@ -126,6 +128,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'luqmansportfolio@gmail.com'
-EMAIL_HOST_PASSWORD = 'ffgp ltpj vgkn rpni'  # replace with Gmail App Password
+EMAIL_HOST_USER = os.environ.get('iit.qau.edu.pk@gmail.com', '')
+EMAIL_HOST_PASSWORD = os.environ.get('fkhc veij surk towo', '')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
