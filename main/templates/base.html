@@ -2,10 +2,91 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Luqman Bhatti - Portfolio{% endblock %}</title>
+
+  <!-- Primary Meta Tags -->
+  <title>{% block title %}Muhammad Luqman Bhatti - Portfolio | IT Student, Videographer & Photographer{% endblock %}
+  </title>
+  <meta name="title" content="Muhammad Luqman Bhatti - Portfolio | IT Student, Videographer & Photographer">
+  <meta name="description"
+    content="Muhammad Luqman Bhatti (Luqman Bhatti) - IT student, videographer, photographer, and web developer. Explore my creative portfolio showcasing technology, photography, videography, and digital projects.">
+  <meta name="keywords"
+    content="Luqman Bhatti, Muhammad Luqman Bhatti, Muhammad Luqman, Luqman, IT student, videographer, photographer, web developer, QAU, Quaid-i-Azam University, portfolio, creative projects, technology">
+  <meta name="author" content="Muhammad Luqman Bhatti">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://luqmanbhatti.up.railway.app{% block canonical %}{% endblock %}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{% static 'images/fi.ico' %}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/fi.ico' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/fi.ico' %}">
+  <link rel="icon" href="{% static 'images/fi.ico' %}">
+  <link rel="shortcut icon" href="{% static 'images/fi.ico' %}">
+  <link rel="icon" type="image/vnd.microsoft.icon" href="{% static 'images/fi.ico' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/fi.ico' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/fi.ico' %}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/fi.ico' %}">
+  <link rel="icon" type="image/png" sizes="512x512" href="{% static 'images/fi.ico' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/fi.ico' %}">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://luqmanbhatti.up.railway.app{% block og_url %}{% endblock %}">
+  <meta property="og:title"
+    content="{% block og_title %}Muhammad Luqman Bhatti - Portfolio | IT Student, Videographer & Photographer{% endblock %}">
+  <meta property="og:description"
+    content="{% block og_description %}Muhammad Luqman Bhatti (Luqman Bhatti) - IT student, videographer, photographer, and web developer. Explore my creative portfolio.{% endblock %}">
+  <meta property="og:image" content="https://luqmanbhatti.up.railway.app{% static 'images/logo.jpg' %}">
+  <meta property="og:site_name" content="Luqman Bhatti Portfolio">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://luqmanbhatti.up.railway.app{% block twitter_url %}{% endblock %}">
+  <meta property="twitter:title" content="{% block twitter_title %}Muhammad Luqman Bhatti - Portfolio{% endblock %}">
+  <meta property="twitter:description"
+    content="{% block twitter_description %}IT student, videographer, photographer, and web developer. Explore my creative portfolio.{% endblock %}">
+  <meta property="twitter:image" content="https://luqmanbhatti.up.railway.app{% static 'images/logo.jpg' %}">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Muhammad Luqman Bhatti",
+    "alternateName": ["Luqman Bhatti", "Muhammad Luqman"],
+    "url": "https://luqmanbhatti.up.railway.app",
+    "image": "https://luqmanbhatti.up.railway.app{% static 'images/logo.jpg' %}",
+    "jobTitle": "IT Student, Videographer & Photographer",
+    "worksFor": {
+      "@type": "EducationalOrganization",
+      "name": "Quaid-i-Azam University"
+    },
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Quaid-i-Azam University"
+    },
+    "email": "mluqman.42313023@iit.qau.edu.pk",
+    "telephone": "+92-332-9366276",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Pakistan"
+    },
+    "sameAs": [
+      "https://www.facebook.com/share/1EvqfZ8KNh/",
+      "https://www.instagram.com/qau_by_luqman",
+      "https://www.linkedin.com/in/luqmanbhatti/",
+      "https://github.com/luqmanbhatti"
+    ],
+    "knowsAbout": ["Web Development", "Videography", "Photography", "IT", "Digital Media"],
+    "description": "IT student passionate about combining creativity with technology through videography, photography, and web development."
+  }
+  </script>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +99,8 @@
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       background-color: #f8f9fa;
-      padding-top: 70px; /* space for fixed navbar */
+      padding-top: 70px;
+      /* space for fixed navbar */
     }
 
     /* Navbar fixed on top */
@@ -29,18 +111,21 @@
       width: 100%;
       z-index: 1000;
     }
+
     .navbar-brand {
       color: #fff !important;
       font-weight: 600;
       display: flex;
       align-items: center;
     }
+
     .navbar-brand img {
       height: 40px;
       width: 40px;
       border-radius: 50%;
       margin-right: 10px;
     }
+
     .nav-link {
       color: #fff !important;
       font-weight: 500;
@@ -53,11 +138,13 @@
       color: #fff;
       padding: 40px 0 0;
     }
+
     footer h5 {
       font-weight: 600;
       margin-bottom: 15px;
       position: relative;
     }
+
     footer h5::after {
       content: "";
       display: block;
@@ -66,26 +153,32 @@
       background: #28a745;
       margin-top: 5px;
     }
+
     footer ul {
       list-style: none;
       padding: 0;
     }
+
     footer ul li {
       margin-bottom: 10px;
     }
+
     footer ul li a {
       text-decoration: none;
       color: #ccc;
     }
+
     footer ul li a:hover {
       color: #fff;
     }
+
     footer .social-icons a {
       color: #fff;
       font-size: 20px;
       margin-right: 15px;
       transition: color 0.3s;
     }
+
     footer .social-icons a:hover {
       color: #28a745;
     }
@@ -105,7 +198,8 @@
     .video-bg-container {
       position: relative;
       z-index: 0;
-      height: 60vh; /* smaller hero height */
+      height: 60vh;
+      /* smaller hero height */
       min-height: 400px;
     }
 
@@ -117,6 +211,7 @@
 
   {% block extra_css %}{% endblock %}
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -134,7 +229,8 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'main:about' %}">About</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'main:stack_tech' %}">Stack Tech</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'main:videography' %}">Videography</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'main:photography_designs' %}">Photography & Designs</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'main:photography_designs' %}">Photography & Designs</a>
+          </li>
           <li class="nav-item"><a class="nav-link" href="{% url 'main:contact' %}">Contact</a></li>
           <!-- Always show Login -->
           <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
@@ -159,7 +255,8 @@
         <div class="col-md-4">
           <h5>About Me</h5>
           <p>
-            I’m Muhammad Luqman, an IT student passionate about creativity and technology. I create videos, photos, and digital projects that blend technical skills with artistic storytelling.
+            I’m Muhammad Luqman, an IT student passionate about creativity and technology. I create videos, photos, and
+            digital projects that blend technical skills with artistic storytelling.
           </p>
         </div>
 
@@ -183,9 +280,10 @@
           <p><i class="fa fa-phone"></i> +92-332-9366276</p>
           <div class="social-icons">
             <a href="https://www.facebook.com/share/1EvqfZ8KNh/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/qau_by_luqman?utm_source=qr&igsh=MXRtdTg2YjJlNTk1NA==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/qau_by_luqman?utm_source=qr&igsh=MXRtdTg2YjJlNTk1NA==" target="_blank"><i
+                class="fab fa-instagram"></i></a>
             <a href="https://www.linkedin.com/in/luqmanbhatti/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/luqman-bhatti" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/luqmanbhatti" target="_blank"><i class="fab fa-github"></i></a>
           </div>
         </div>
       </div>
@@ -202,4 +300,5 @@
 
   {% block extra_js %}{% endblock %}
 </body>
+
 </html>

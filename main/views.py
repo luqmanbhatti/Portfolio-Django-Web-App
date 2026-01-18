@@ -207,3 +207,14 @@ def delete_photography_post(request, pk):
         messages.success(request, "Photography post deleted successfully.")
         return redirect("main:dashboard")
     return render(request, "delete_photography_post.html", {"photo": photo})
+
+# ---------------------------
+# SEO Views
+# ---------------------------
+
+def sitemap(request):
+    return render(request, "sitemap.xml", content_type="application/xml")
+
+def robots(request):
+    return render(request, "robots.txt", content_type="text/plain")
+

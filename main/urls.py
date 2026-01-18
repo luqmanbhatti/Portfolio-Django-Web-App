@@ -1,9 +1,11 @@
 from django.urls import path
+from django.views.generic.base import RedirectView
 from . import views
 
 app_name = "main"  # Recommended for namespacing URLs
 
 urlpatterns = [
+    path("favicon.ico", RedirectView.as_view(url="/static/images/fi.ico", permanent=True)),
     # Portfolio pages
     path("", views.home, name="home"),                      
     path("about/", views.about, name="about"),
@@ -30,4 +32,9 @@ urlpatterns = [
     path("photography/add/", views.add_photography_post, name="add_photography_post"),
     path("photography/edit/<int:pk>/", views.edit_photography_post, name="edit_photography_post"),
     path("photography/delete/<int:pk>/", views.delete_photography_post, name="delete_photography_post"),
+    
+    # SEO
+    path("sitemap.xml", views.sitemap, name="sitemap"),
+    path("robots.txt", views.robots, name="robots"),
 ]
+

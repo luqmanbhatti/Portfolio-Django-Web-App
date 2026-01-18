@@ -15,6 +15,22 @@ DEBUG = False  # Production must be False
 ALLOWED_HOSTS = ['*']  # You can restrict to your Render domain later
 
 # -----------------------------
+# Security Best Practices
+# -----------------------------
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
+# HSTS settings (Uncomment for production if using HTTPS)
+# SECURE_HSTS_SECONDS = 31536000
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
+
+# Cookie security (Uncomment for production if using HTTPS)
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+
+# -----------------------------
 # Installed apps
 # -----------------------------
 INSTALLED_APPS = [
@@ -67,12 +83,49 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # -----------------------------
 # Database (SQLite for now)
 # -----------------------------
+import dj_database_url
+
+# -----------------------------
+# Database (SQLite locally, PostgreSQL on Railway)
+# -----------------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Parse database configuration from $DATABASE_URL
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
+# -----------------------------
+# Security Best Practices (Production Only)
+# -----------------------------
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+    
+    # HSTS settings
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+    # Cookie security
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+    # Trust Railway's proxy
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # Railway domain for CSRF protection
+    CSRF_TRUSTED_ORIGINS = ['https://luqmanbhatti.up.railway.app']
+else:
+    # Relaxed settings for local dev
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
 
 # -----------------------------
 # Password validation
