@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete Photography Post - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+.delete-section {
+    max-width: 600px;
+    margin: 100px auto;
+    background: #ff4444;
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.delete-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.delete-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.delete-section form button {
+    background: #fff;
+    color: #ff4444;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 0 10px;
+}
+
+.delete-section form button:hover {
+    background: #eee;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="delete-section">
+    <h2>Delete Photography Post</h2>
+    <p>Are you sure you want to delete "<strong>{{ photo.title }}</strong>"? This action cannot be undone.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+        <a href="{% url 'main:dashboard' %}" class="btn" style="background:#003366;color:#fff;">Cancel</a>
+    </form>
+</div>
+{% endblock %}

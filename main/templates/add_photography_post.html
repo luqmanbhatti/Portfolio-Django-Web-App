@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Add Photography Post - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Container */
+.form-section {
+    max-width: 700px;
+    margin: 80px auto;
+    background: #003366;
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Heading */
+.form-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Form fields */
+.form-section form input,
+.form-section form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+/* Buttons */
+.form-section form button {
+    background: #ff9900;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.form-section form button:hover {
+    background: #cc7a00;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-section">
+    <h2>Add Photography Post</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Post Title" required>
+        <input type="file" name="image" accept="image/*" required>
+        <textarea name="description" rows="5" placeholder="Description (optional)"></textarea>
+        <button type="submit">Add Post</button>
+    </form>
+</div>
+{% endblock %}

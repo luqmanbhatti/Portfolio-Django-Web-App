@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit Stack Tech Post - Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-container {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #003366;
+        color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .form-container input, .form-container textarea {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: none;
+        font-size: 1rem;
+    }
+    .form-container input[type="file"] {
+        padding: 5px;
+    }
+    .form-container button {
+        background: #ffcc00;
+        color: #003366;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+    }
+    .form-container button:hover {
+        background: #e6b800;
+    }
+    .current-image {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .current-image img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Edit Stack Tech Post</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="title" value="{{ project.title }}" placeholder="Project Title" required>
+        <textarea name="description" rows="5" placeholder="Project Description" required>{{ project.description }}</textarea>
+        
+        {% if project.image %}
+        <div class="current-image">
+            <label>Current Image:</label>
+            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+        </div>
+        {% endif %}
+        
+        <input type="file" name="image" accept="image/*">
+        <input type="url" name="url" value="{{ project.url }}" placeholder="Project URL (optional)">
+        <button type="submit">Update Project</button>
+    </form>
+</div>
+{% endblock %}

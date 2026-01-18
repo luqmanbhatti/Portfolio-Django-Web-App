@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit Stack Tech Post - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Container styling */
+.form-section {
+    max-width: 800px;
+    margin: 50px auto;
+    background: #003366;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    color: #fff;
+}
+
+/* Headings */
+.form-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Form fields */
+.form-section input,
+.form-section textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+}
+
+/* Submit button */
+.form-section button {
+    background: #f8f9fa;
+    color: #003366;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+.form-section button:hover {
+    background: #e0e0e0;
+}
+
+/* Messages */
+.messages {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.messages p {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #00ff99;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-section">
+    <h2>Edit Stack Tech Post</h2>
+
+    <!-- Display messages -->
+    <div class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Post Title" value="{{ project.title }}" required>
+        <textarea name="description" rows="6" placeholder="Description of the project..." required>{{ project.description }}</textarea>
+        <button type="submit">Update Post</button>
+    </form>
+</div>
+{% endblock %}

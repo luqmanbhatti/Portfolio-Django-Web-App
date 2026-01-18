@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+/* ============================= */
+/* General Text Colors */
+.text-navy {
+    color: #001f54; /* Deep navy blue */
+}
+
+/* ============================= */
+/* Page Container */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* ============================= */
+/* Heading */
+.page-heading {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 1px;
+}
+
+/* ============================= */
+/* Photo Grid */
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* ============================= */
+/* Photo Card */
+.photo-card {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* ============================= */
+/* Image/Video Styling */
+.photo-card img,
+.photo-card video {
+    width: 100%;
+    height: auto;
+    max-height: 330px;   /* slightly smaller size */
+    object-fit: contain; /* preserves original ratio */
+    background: #000;    /* black bars if needed */
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.photo-card:hover img,
+.photo-card:hover video {
+    transform: scale(1.03);
+}
+
+/* ============================= */
+/* Card Content */
+.photo-card-content {
+    padding: 0.8rem 0.9rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.photo-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #001f54;
+    line-height: 1.3;
+}
+
+.photo-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #001f54;
+    flex-grow: 1;
+    word-wrap: break-word;
+}
+
+/* ============================= */
+/* Responsive */
+@media (max-width: 768px) {
+    .page-heading {
+        font-size: 2rem;
+    }
+    .photos-grid {
+        gap: 0.8rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="page-heading text-navy">Photography Portfolio</h1>
+
+    <div class="photos-grid">
+        {% for photo in photos %}
+        <div class="photo-card">
+            {% if photo.is_video %}
+                {% if photo.url %}
+                    <video controls>
+                        <source src="{{ photo.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% elif photo.video_file %}
+                    <video controls>
+                        <source src="{{ photo.video_file.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+            {% else %}
+                {% if photo.url %}
+                    <!-- Cloudinary or external URL -->
+                    <img src="{{ photo.url }}" alt="{{ photo.title }}">
+                {% elif photo.image %}
+                    <!-- Local uploaded image -->
+                    <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+                {% else %}
+                    <!-- fallback if nothing exists -->
+                    <div style="background:#eee; height:200px; display:flex; justify-content:center; align-items:center;">
+                        <span>No image available</span>
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="photo-card-content">
+                <h2 class="photo-card-title">{{ photo.title }}</h2>
+                <p class="photo-card-desc">{{ photo.description }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-navy col-span-full">No photos or videos found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

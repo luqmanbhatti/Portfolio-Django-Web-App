@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit Videography Post - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Container styling */
+.form-section {
+    max-width: 800px;
+    margin: 60px auto;
+    background: #003366;
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Heading */
+.form-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* Form elements */
+.form-section form input,
+.form-section form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.form-section form input[type="file"] {
+    padding: 8px;
+}
+
+/* Buttons */
+.form-section button {
+    background: #ff9900;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.form-section button:hover {
+    background: #e68a00;
+}
+
+/* Labels */
+.form-section label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-section">
+    <h2>Edit Videography Post</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="{{ video.title }}" required>
+
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="4" required>{{ video.description }}</textarea>
+
+        <label for="video_file">Upload New Video (optional)</label>
+        <input type="file" name="video_file" id="video_file" accept="video/*">
+
+        <label for="video_url">Video URL (optional)</label>
+        <input type="url" name="video_url" id="video_url" value="{{ video.url }}">
+
+        <button type="submit">Update Videography Post</button>
+    </form>
+</div>
+{% endblock %}

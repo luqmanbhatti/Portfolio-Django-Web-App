@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ============================= */
+/* Container & alignment */
+.contact-section {
+    max-width: 1200px; /* wider boxes */
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Contact Hero */
+.contact-hero {
+    background: #003366; /* changed to match other boxes */
+    color: #fff;
+    text-align: center;
+    padding: 120px 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+.contact-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffcc00; /* accent color for headings */
+}
+.contact-hero p {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+/* Card Boxes */
+.card-box {
+    background: #003366;
+    color: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+    margin-bottom: 30px;
+    text-align: center;
+    transition: 0.3s;
+}
+.card-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+}
+.card-box h5 {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #ffcc00;
+}
+.card-box a, .card-box p {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+}
+.card-box a:hover {
+    color: #ffcc00;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+.social-links a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #fff;
+    color: #003366;
+    font-size: 1.3rem;
+    transition: 0.3s;
+}
+.social-links a:hover {
+    background: #ffcc00;
+    color: #003366;
+    transform: translateY(-4px);
+}
+
+/* Contact Form */
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+.contact-form button {
+    background: #ffcc00;
+    color: #003366;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.contact-form button:hover {
+    background: #e6b800;
+}
+
+/* Messages */
+.messages {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.messages p {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #00ff99;
+}
+.messages p.error { color: red; }
+
+@media (max-width: 768px) {
+    .contact-hero h1 { font-size: 2.2rem; }
+    .contact-hero p { font-size: 1rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Contact Hero -->
+<div class="contact-section">
+  <div class="contact-hero">
+    <h1>Contact Me</h1>
+    <p>Let’s connect! Reach out for collaborations, projects, or just to say hello.</p>
+  </div>
+</div>
+
+<!-- Contact Info -->
+<div class="contact-section">
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card-box">
+        <h5>Email</h5>
+        <a href="mailto:mluqman8494@gmail.com">mluqman8494@gmail.com</a>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-box">
+        <h5>Phone</h5>
+        <p>03329366276</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Social Media Section -->
+<div class="contact-section">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card-box">
+        <h5>Professional Social Media</h5>
+        <div class="social-links">
+          <a href="https://www.instagram.com/qau_by_luqman" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/luqmanbhatti" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-box">
+        <h5>Personal Social Media</h5>
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/1EvqfZ8KNh/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.tiktok.com/@muhammadluqmanbhatti" target="_blank"><i class="fab fa-tiktok"></i></a>
+          <a href="https://www.instagram.com/luqmanbhatti01" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-box">
+        <h5>Others</h5>
+        <div class="social-links">
+          <a href="https://github.com/luqman-bhatti" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Form -->
+<div class="contact-section">
+  <div class="card-box contact-form">
+    <h5>Send Message</h5>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

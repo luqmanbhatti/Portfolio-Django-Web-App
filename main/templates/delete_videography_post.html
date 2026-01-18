@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete Videography Post - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Container styling */
+.confirm-section {
+    max-width: 700px;
+    margin: 80px auto;
+    background: #003366;
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Heading */
+.confirm-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* Message */
+.confirm-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.confirm-section .btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin: 0 10px;
+}
+
+.confirm-section .btn-danger {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+}
+.confirm-section .btn-danger:hover {
+    background: #e60000;
+}
+
+.confirm-section .btn-secondary {
+    background: #999;
+    color: #fff;
+    border: none;
+}
+.confirm-section .btn-secondary:hover {
+    background: #777;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="confirm-section">
+    <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete the videography post titled "<strong>{{ video.title }}</strong>"? This action cannot be undone.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'main:videography' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

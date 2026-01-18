@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Me - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ============================= */
+/* Hero Section - keep photo background and wider */
+.about-hero {
+    position: relative;
+    background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)),
+                url("{% static 'images/about-bg.jpg' %}") center/cover no-repeat;
+    color: #fff;
+    padding: 140px 20px 100px 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    max-width: 1200px; /* wider */
+    margin: 40px auto; /* center horizontally */
+}
+.about-hero img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    margin-bottom: 20px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+}
+.about-hero img:hover { transform: scale(1.05); }
+.about-hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 15px; letter-spacing: 1px; }
+.about-hero p { font-size: 1.25rem; line-height: 1.7; }
+
+/* ============================= */
+/* Bio Section */
+.about-section {
+    background: #003366;
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+    max-width: 1200px; /* match hero width */
+    margin: 40px auto; /* center horizontally */
+    text-align: left;
+}
+.about-section h2 { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 25px; }
+.about-section p { font-size: 1.15rem; line-height: 1.8; margin-bottom: 20px; }
+.about-section a { color: #ffcc00; text-decoration: none; }
+.about-section a:hover { text-decoration: underline; }
+
+/* ============================= */
+/* Skills Section */
+.skills-section {
+    background: #003366;
+    padding: 60px 30px;
+    border-radius: 15px;
+    color: #fff;
+    max-width: 1200px; /* match hero width */
+    margin: 40px auto; /* center horizontally */
+}
+.skills-section h2 { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 50px; }
+.skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+.skill-card {
+    background: #00509e;
+    border-radius: 15px;
+    padding: 35px 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    flex: 1 1 30%;
+    min-width: 250px;
+}
+.skill-card:hover { transform: translateY(-8px); box-shadow: 0 15px 25px rgba(0,0,0,0.2); }
+.skill-card i { font-size: 3rem; color: #ffcc00; margin-bottom: 15px; }
+.skill-card h5 { font-weight: 700; margin-bottom: 12px; color: #fff; }
+.skill-card p { font-size: 1rem; color: #f0f0f0; line-height: 1.6; }
+
+/* ============================= */
+/* Responsive */
+@media (max-width: 992px) { .skills-row { justify-content: center; } }
+@media (max-width: 768px) {
+    .about-hero h1 { font-size: 2.5rem; }
+    .about-hero p { font-size: 1.1rem; }
+    .about-section h2 { font-size: 2rem; text-align: center; }
+    .skills-section h2 { font-size: 2rem; }
+    .skill-card { padding: 30px 15px; flex: 1 1 80%; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="about-hero">
+  <img src="{% static 'images/profile.jpg' %}" alt="MUHAMMAD LUQMAN">
+  <h1>About Me</h1>
+  <p>I’m <strong>MUHAMMAD LUQMAN</strong> — an IT student passionate about technology, creativity, and visual storytelling.</p>
+</div>
+
+<!-- Bio Section -->
+<div class="about-section">
+  <h2>Who I Am</h2>
+  <p>
+    I am a dedicated IT student at <a href="https://iit.qau.edu.pk/" target="_blank"><strong>Institute of Information Technology, Quaid-i-Azam University</strong></a>, 
+    pursuing a <strong>Bachelor’s in Information Technology</strong>, Class of 2027.
+  </p>
+  <p>
+    My interests lie at the intersection of <strong>technology</strong>, <strong>software</strong>, and <strong>design</strong>. Beyond academics, I explore 
+    <strong>videography</strong> and <strong>photography</strong> as creative outlets, blending technical skills with artistic expression.
+  </p>
+  <p>
+    From coding projects to film editing, I strive for <em>innovation</em>, <em>storytelling</em>, and <em>meaningful impact</em>. 
+    I strongly believe in continuous growth, always learning new tools and techniques to refine my craft and expand my expertise.
+  </p>
+</div>
+
+<!-- Skills Section -->
+<div class="skills-section">
+  <h2>What I Do</h2>
+  <div class="skills-row">
+    <div class="skill-card">
+      <i class="fa fa-laptop-code"></i>
+      <h5>IT & Development</h5>
+      <p>Building responsive, user-friendly web solutions and exploring modern frameworks to create efficient applications.</p>
+    </div>
+    <div class="skill-card">
+      <i class="fa fa-video"></i>
+      <h5>Videography</h5>
+      <p>Crafting cinematic visuals with professional editing, storytelling, and creative techniques to bring ideas to life.</p>
+    </div>
+    <div class="skill-card">
+      <i class="fa fa-camera"></i>
+      <h5>Photography</h5>
+      <p>Capturing meaningful moments and delivering impactful imagery with a balance of creativity and aesthetics.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

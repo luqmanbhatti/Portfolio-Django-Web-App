@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete Stack Tech Post - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Container styling */
+.confirm-section {
+    max-width: 700px;
+    margin: 80px auto;
+    background: #003366;
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+.confirm-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* Message */
+.confirm-section p {
+    font-size: 1.2rem;
+    margin-bottom: 35px;
+}
+
+/* Buttons */
+.confirm-section .btn {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px 25px;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin: 0 10px;
+}
+.confirm-section .btn-cancel {
+    background: #f8f9fa;
+    color: #003366;
+    border: none;
+}
+.confirm-section .btn-cancel:hover {
+    background: #e0e0e0;
+}
+.confirm-section .btn-delete {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+}
+.confirm-section .btn-delete:hover {
+    background: #e60000;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="confirm-section">
+    <h2>Delete Stack Tech Post</h2>
+    <p>Are you sure you want to delete the post titled "<strong>{{ project.title }}</strong>"? This action cannot be undone.</p>
+    <form method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-delete">Yes, Delete</button>
+    </form>
+    <a href="{% url 'main:dashboard' %}" class="btn btn-cancel">Cancel</a>
+</div>
+{% endblock %}

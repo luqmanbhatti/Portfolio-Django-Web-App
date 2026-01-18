@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+/* ============================= */
+/* General Colors */
+.text-primary { color: #003366; }
+.text-light { color: #ffffff; }
+
+/* ============================= */
+/* Container */
+.page-container { max-width: 1400px; margin: 0 auto; padding: 4rem 1.5rem; }
+
+/* ============================= */
+/* Heading */
+.page-heading {
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    color: #003366;
+}
+
+/* ============================= */
+/* Subtitle Box */
+.page-subtitle-box {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+    padding: 1rem 1.5rem;
+    background-color: #facc15;
+    color: #000000;
+    font-size: 1.1rem;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* ============================= */
+/* Grid Layout: 1 project per row */
+.projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}
+
+/* ============================= */
+/* Project Card */
+.project-card {
+    background: linear-gradient(145deg, #1e293b, #111827);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1400px;
+}
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.45);
+}
+
+/* ============================= */
+/* Image Styling - 16:9 Aspect Ratio */
+.project-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+/* ============================= */
+/* Card Content */
+.project-card-content {
+    padding: 1.5rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.project-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+.project-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #d1d5db;
+    flex-grow: 1;
+    margin-bottom: 0;
+    white-space: pre-line;   /* ✅ Preserve newlines */
+}
+
+/* ============================= */
+/* Responsive */
+@media (max-width: 1200px) {
+    .page-subtitle-box { max-width: 95%; }
+    .project-card { max-width: 95%; }
+}
+@media (max-width: 768px) {
+    .page-heading { font-size: 2.4rem; }
+    .project-card { max-width: 100%; }
+}
+@media (max-width: 500px) {
+    .projects-grid { gap: 1.5rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="page-heading">My Tech Projects</h1>
+
+    <div class="page-subtitle-box">
+        A showcase of my recent projects with technologies used and insights into their functionality
+    </div>
+
+    <div class="projects-grid">
+        {% for project in projects %}
+        <div class="project-card">
+            {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+            {% elif project.url %}
+                <img src="{{ project.url }}" alt="{{ project.title }}">
+            {% else %}
+                <div style="width:100%; aspect-ratio:16/9; background:#334155; display:flex; align-items:center; justify-content:center; color:#ccc;">No image</div>
+            {% endif %}
+
+            <div class="project-card-content">
+                <h2 class="project-title">{{ project.title }}</h2>
+                <p class="project-description">
+                    {{ project.description|default:"This project demonstrates my skills and creativity. Built using modern technologies with focus on problem-solving and design."|linebreaksbr }}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

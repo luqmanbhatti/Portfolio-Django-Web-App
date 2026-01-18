@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - Muhammad Luqman{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-header {
+        margin-top: 50px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .dashboard-header h1 {
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: #003366;
+    }
+    .quick-actions {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .quick-actions .btn {
+        margin: 5px;
+        min-width: 180px;
+        font-weight: 500;
+    }
+    .post-section {
+        margin-bottom: 50px;
+    }
+    .post-section h3 {
+        color: #003366;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .card-post {
+        margin-bottom: 15px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        transition: 0.3s;
+    }
+    .card-post:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+    .card-post .card-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+    .card-post .card-body span a {
+        margin-left: 8px;
+    }
+    .no-post {
+        text-align: center;
+        font-style: italic;
+        color: #555;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="dashboard-header">
+        <h1>Welcome, {{ user.username }}</h1>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <a href="{% url 'main:add_stack_post' %}" class="btn btn-primary">Add Stack Tech Post</a>
+        <a href="{% url 'main:add_videography_post' %}" class="btn btn-success">Add Videography Post</a>
+        <a href="{% url 'main:add_photography_post' %}" class="btn btn-warning text-white">Add Photography Post</a>
+    </div>
+
+    <!-- User Posts -->
+    <div class="row">
+        <!-- Stack Tech Posts -->
+        <div class="col-md-4 post-section">
+            <h3>Stack Tech Posts</h3>
+            {% if projects %}
+                {% for project in projects %}
+                    <div class="card card-post">
+                        <div class="card-body">
+                            {{ project.title }}
+                            <span>
+                                <a href="{% url 'main:edit_stack_post' project.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a href="{% url 'main:delete_stack_post' project.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-post">No Stack Tech posts yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Videography Posts -->
+        <div class="col-md-4 post-section">
+            <h3>Videography Posts</h3>
+            {% if videos %}
+                {% for video in videos %}
+                    <div class="card card-post">
+                        <div class="card-body">
+                            {{ video.title }}
+                            <span>
+                                <a href="{% url 'main:edit_videography_post' video.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a href="{% url 'main:delete_videography_post' video.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-post">No Videography posts yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Photography Posts -->
+        <div class="col-md-4 post-section">
+            <h3>Photography Posts</h3>
+            {% if photos %}
+                {% for photo in photos %}
+                    <div class="card card-post">
+                        <div class="card-body">
+                            {{ photo.title }}
+                            <span>
+                                <a href="{% url 'main:edit_photography_post' photo.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a href="{% url 'main:delete_photography_post' photo.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-post">No Photography posts yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
